@@ -34,14 +34,6 @@
       compile project(':react-native-real-time-audio-stream')
   	```
 
-#### Windows
-[Read it! :D](https://github.com/ReactWindows/react-native)
-
-1. In Visual Studio add the `RNRealTimeAudioStream.sln` in `node_modules/react-native-real-time-audio-stream/windows/RNRealTimeAudioStream.sln` folder to their solution, reference from their app.
-2. Open up your `MainPage.cs` app
-  - Add `using Real.Time.Audio.Stream.RNRealTimeAudioStream;` to the usings at the top of the file
-  - Add `new RNRealTimeAudioStreamPackage()` to the `List<IReactPackage>` returned by the `Packages` method
-
 
 ## Usage
 ```javascript

@@ -1,6 +1,6 @@
 {
   "name": "react-native-real-time-audio-stream",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Real time audio stream for react native",
   "main": "index.js",
   "scripts": {
@@ -26,9 +26,6 @@
     "type": "git",
     "url": "https://github.com/Mithronn/react-native-real-time-audio-stream.git"
   },
-  "peerDependencies": {
-    "react-native": "^0.41.2",
-    "react-native-windows": "0.41.0-rc.1"
-  },
+  "peerDependencies": {},
   "dependencies": {}
 }
