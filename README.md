@@ -39,7 +39,37 @@
 ```javascript
 import RNRealTimeAudioStream from 'react-native-real-time-audio-stream';
 
-// TODO: What to do with the module?
-RNRealTimeAudioStream;
+const options = {
+	sampleRate: 16000 // Default is 44100
+    channels: 1 // Default is 1
+    bitsPerSample: // Default is 16
+    audioSource?: number // Default is 6 @android
+    bufferSize?: number // Default is 2048
+}
+
+// You need to initialize before start recording
+RNRealTimeAudioStream.init(options);
+
+// 
+RNRealTimeAudioStream.on('data',data => {
+	/*
+	data = {
+		data: string -> base64-encoded audio chunk data
+		amplitude: number -> amplitude value
+		decibel_level: numbe -> sound level in decibels, -160 is a silence level
+		decibel_raw_value: number -> 0 or amplitude value
+	}
+	*/
+});
+
+RNRealTimeAudioStream.start();
+
+RNRealTimeAudioStream.stop();
+
+// Its only stop data emitting but record object still record
+RNRealTimeAudioStream.pause();
+
+RNRealTimeAudioStream.resume();
+
 ```
   
