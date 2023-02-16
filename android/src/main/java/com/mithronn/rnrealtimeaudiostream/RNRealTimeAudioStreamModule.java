@@ -94,7 +94,7 @@ public class RNRealTimeAudioStreamModule extends ReactContextBaseJavaModule {
                   int bytesRead;
                   int count = 0;
                   String base64Data;
-                  int amplitude;
+                  double amplitude;
                   WritableMap body;
                   byte[] buffer = new byte[bufferSize];
 
@@ -106,15 +106,25 @@ public class RNRealTimeAudioStreamModule extends ReactContextBaseJavaModule {
                         if (bytesRead > 0 && ++count > 2) {
                           // Create new map
                             body = Arguments.createMap();
-  
+                            amplitude = 0;
                             base64Data = Base64.encodeToString(buffer, Base64.NO_WRAP);
-                            amplitude = recorder.getMaxAmplitude();
+
+                            // Currently can only calculate mono channel amplitude
+                            if (channelConfig == AudioFormat.CHANNEL_IN_MONO) {
+                              for (int i = 0; i < buffer.length/2; i++) {
+                                double y = (buffer[i*2] | buffer[i*2+1] << 8) / 32768.0
+                                // depending on your endianness:
+                                // double y = (audioData[i*2]<<8 | audioData[i*2+1]) / 32768.0
+                                amplitude += Math.abs(y);
+                              }
+                              amplitude = amplitude / buffer.length / 2;
+                            }
   
                             // Assign base64Data
                             body.putString("data",base64Data);
   
                             // Assign amplitude
-                            body.putInt("amplitude",amplitude);
+                            body.putDouble("amplitude",amplitude);
   
                             // Assign amplitude decibel_raw_level and decibel_level
                             if (amplitude == 0) {
