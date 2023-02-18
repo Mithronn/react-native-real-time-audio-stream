@@ -56,8 +56,8 @@ RNRealTimeAudioStream.on('data',data => {
 	data = {
 		data: string -> base64-encoded audio chunk data
 		amplitude: number -> amplitude value
-		decibel_level: numbe -> sound level in decibels, -160 is a silence level
-		decibel_raw_value: number -> 0 or amplitude value
+		frequency: number -> frequency value
+		decibel: number -> decibel value
 	}
 	*/
 });

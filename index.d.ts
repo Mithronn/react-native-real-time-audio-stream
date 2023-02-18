@@ -2,8 +2,8 @@ declare module "react-native-real-time-audio-stream" {
     export interface DataEvent {
         data: string,
         amplitude: number,
-        decibel_level: number,
-        decibel_raw_level: number,
+        frequency: number,
+        decibel: number,
     }
 
     export interface AudioRecordStreamInterface {

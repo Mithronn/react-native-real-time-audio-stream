@@ -94,9 +94,12 @@ public class RNRealTimeAudioStreamModule extends ReactContextBaseJavaModule {
                   int bytesRead;
                   int count = 0;
                   String base64Data;
-                  double amplitude;
+                  int amplitude;
+                  double frequency;
+                  double decibel;
                   WritableMap body;
                   byte[] buffer = new byte[bufferSize];
+                  AudioCalculator audioCalculator = new AudioCalculator();
 
                   while (isRecording) {
                     if(!isPaused) {
@@ -106,34 +109,39 @@ public class RNRealTimeAudioStreamModule extends ReactContextBaseJavaModule {
                         if (bytesRead > 0 && ++count > 2) {
                           // Create new map
                             body = Arguments.createMap();
-                            amplitude = 0;
+                            // amplitude = 0;
                             base64Data = Base64.encodeToString(buffer, Base64.NO_WRAP);
+                            audioCalculator = new AudioCalculator(buffer);
+                            // // Currently can only calculate mono channel amplitude
+                            // if (channelConfig == AudioFormat.CHANNEL_IN_MONO) {
+                            //   for (int i = 0; i < buffer.length/2; i++) {
+                            //     double y = (buffer[i*2] | buffer[i*2+1] << 8) / 32768.0;
+                            //     // depending on your endianness:
+                            //     // double y = (audioData[i*2]<<8 | audioData[i*2+1]) / 32768.0
+                            //     amplitude += Math.abs(y);
+                            //   }
+                            //   amplitude = amplitude / buffer.length / 2;
+                            // }
 
-                            // Currently can only calculate mono channel amplitude
-                            if (channelConfig == AudioFormat.CHANNEL_IN_MONO) {
-                              for (int i = 0; i < buffer.length/2; i++) {
-                                double y = (buffer[i*2] | buffer[i*2+1] << 8) / 32768.0
-                                // depending on your endianness:
-                                // double y = (audioData[i*2]<<8 | audioData[i*2+1]) / 32768.0
-                                amplitude += Math.abs(y);
-                              }
-                              amplitude = amplitude / buffer.length / 2;
-                            }
-  
+                            amplitude = audioCalculator.getAmplitude(buffer);
+                            frequency = audioCalculator.getFrequency();
+                            decibel = audioCalculator.getDecibel();
+                            
                             // Assign base64Data
                             body.putString("data",base64Data);
+                            // Assign datas to body
+                            body.putInt("amplitude",amplitude);
+                            body.putDouble("frequency",frequency);
+                            body.putDouble("decibel",decibel);
   
-                            // Assign amplitude
-                            body.putDouble("amplitude",amplitude);
-  
-                            // Assign amplitude decibel_raw_level and decibel_level
-                            if (amplitude == 0) {
-                              body.putInt("decibel_level", -160);
-                              body.putInt("decibel_raw_level", 0);
-                            } else {
-                              body.putInt("decibel_raw_level", amplitude);
-                              body.putInt("decibel_level", (int) (20 * Math.log(((double) amplitude) / 32767d)));
-                            }
+                            // // Assign amplitude decibel_raw_level and decibel_level
+                            // if (amplitude == 0) {
+                            //   body.putInt("decibel_level", -160);
+                            //   body.putInt("decibel_raw_level", 0);
+                            // } else {
+                            //   body.putInt("decibel_raw_level", amplitude);
+                            //   body.putInt("decibel_level", (int) (20 * Math.log(((double) amplitude) / 32767d)));
+                            // }
   
                             eventEmitter.emit("data", body);
                         }
