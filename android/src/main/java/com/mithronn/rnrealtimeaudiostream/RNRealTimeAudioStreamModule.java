@@ -140,7 +140,9 @@ public class RNRealTimeAudioStreamModule extends ReactContextBaseJavaModule {
                   }
                   recorder.stop();
               } catch (Exception e) {
-                  e.printStackTrace();
+                  recorder.stop();
+                  eventEmitter.emit("error", e.getMessage());
+
               }
           }
       });

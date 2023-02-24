@@ -11,7 +11,8 @@ AudioRecordStream.pause = () => RNRealTimeAudioStream.pause();
 AudioRecordStream.resume = () => RNRealTimeAudioStream.resume();
 
 const eventsMap = {
-    data: 'data'
+    data: 'data',
+    error: 'error'
 };
 
 AudioRecordStream.on = (event, callback) => {

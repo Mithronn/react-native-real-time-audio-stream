@@ -7,6 +7,7 @@ declare module "react-native-real-time-audio-stream" {
         decibel: number,
     }
 
+
     export interface AudioRecordStreamInterface {
         init: (options: Options) => void
         start: () => void
@@ -14,6 +15,7 @@ declare module "react-native-real-time-audio-stream" {
         pause: () => Promise<string>
         resume: () => Promise<string>
         on: (event: "data", callback: (data: DataEvent) => void) => void
+        on: (event: "error", callback: (data: string) => void) => void
     }
 
     export interface Options {
