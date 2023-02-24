@@ -38,6 +38,9 @@ build/
 .gradle
 local.properties
 *.iml
+gradlew.bat
+gradlew
+gradle/
 
 # BUCK
 buck-out/
