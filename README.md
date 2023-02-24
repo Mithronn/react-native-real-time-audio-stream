@@ -50,11 +50,12 @@ const options = {
 // You need to initialize before start recording
 RNRealTimeAudioStream.init(options);
 
-// 
+// Emiting real time audio with EventEmmiter 
 RNRealTimeAudioStream.on('data',data => {
 	/*
 	data = {
-		data: string -> base64-encoded audio chunk data
+		raw_data: string -> base64-encoded audio chunk data
+		opus_data: string -> base64-encoded opus audio chunk data
 		amplitude: number -> amplitude value
 		frequency: number -> frequency value
 		decibel: number -> decibel value
@@ -62,8 +63,10 @@ RNRealTimeAudioStream.on('data',data => {
 	*/
 });
 
+// If already started its do nothing
 RNRealTimeAudioStream.start();
 
+// If already stopped its do nothing
 RNRealTimeAudioStream.stop();
 
 // Its only stop data emitting but record object still record
