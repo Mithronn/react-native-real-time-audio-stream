@@ -14,7 +14,8 @@
     "record",
     "recording",
     "voice",
-    "voice recording"
+    "voice recording",
+    "voip"
   ],
   "author": "mithronn",
   "license": "MIT",
