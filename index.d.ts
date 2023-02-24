@@ -1,6 +1,7 @@
 declare module "react-native-real-time-audio-stream" {
     export interface DataEvent {
-        data: string,
+        raw_data: string,
+        opus_data: string,
         amplitude: number,
         frequency: number,
         decibel: number,
@@ -16,19 +17,31 @@ declare module "react-native-real-time-audio-stream" {
     }
 
     export interface Options {
+        /**
+         * Sample Rate in Hz
+         * @default 44100
+         */
         sampleRate: number
         /**
-         * - `1 | 2`
+         * - `1 | 2` 
+         * @default 1
          */
         channels: 1 | 2
         /**
-         * - `8 | 16`
+         * - `8 | 16` 
+         * @default 16
          */
         bitsPerSample: 8 | 16
         /**
-         * - `6`
+         * - `6` 
+         * @default 6
+         * @android only
          */
         audioSource?: number
+        /**
+         * bufferSize
+         * @default 2048
+         */
         bufferSize?: number
     }
 

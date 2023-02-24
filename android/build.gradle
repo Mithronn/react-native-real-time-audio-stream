@@ -22,6 +22,24 @@ android {
 }
 
 dependencies {
-    compileOnly 'com.facebook.react:react-native:+'
+    compile fileTree(dir: 'libs', include: '*.jar')
+    compile 'com.facebook.react:react-native:+'
+}
+
+repositories {
+    google()
+    jcenter()
+    mavenCentral()
+}
+
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.2.1'
+    }
 }
   
