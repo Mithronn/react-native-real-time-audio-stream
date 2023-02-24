@@ -50,7 +50,7 @@ const options = {
 // You need to initialize before start recording
 RNRealTimeAudioStream.init(options);
 
-// Emiting real time audio with EventEmmiter 
+// Emitting real time audio with EventEmmiter 
 RNRealTimeAudioStream.on('data',data => {
 	/*
 	data = {
