@@ -1,6 +1,6 @@
 {
   "name": "react-native-real-time-audio-stream",
-  "version": "1.0.64",
+  "version": "1.0.65",
   "description": "Real time audio stream for react native",
   "main": "index.js",
   "scripts": {
