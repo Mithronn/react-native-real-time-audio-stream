@@ -106,7 +106,11 @@ public class RNRealTimeAudioStreamModule extends ReactContextBaseJavaModule {
                   byte[] buffer = new byte[bufferSize];
                   AudioCalculator audioCalculator = new AudioCalculator();
                   // Opus codec
-                  OpusCodec codec = OpusCodec.newBuilder().withSampleRate(sampleRateInHz).withChannels(channelConfig == AudioFormat.CHANNEL_IN_MONO ? 1 : 2).build();
+                  OpusCodec codec = OpusCodec.newBuilder()
+                  .withSampleRate(sampleRateInHz)
+                  .withChannels(channelConfig == AudioFormat.CHANNEL_IN_MONO ? 1 : 2)
+                  .withFrameSize(bufferSize / ((channelConfig == AudioFormat.CHANNEL_IN_MONO ? 1 : 2) * 2))
+                  .build();
 
                   while (isRecording) {
                     if(!isPaused) {
