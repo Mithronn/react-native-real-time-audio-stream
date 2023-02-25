@@ -18,10 +18,6 @@ import com.facebook.react.modules.core.DeviceEventManagerModule;
 
 import java.lang.Math;
 
-// import opus-jni
-import net.labymod.opus.OpusCodec;
-import net.labymod.opus.OpusCodecOptions;
-
 public class RNRealTimeAudioStreamModule extends ReactContextBaseJavaModule {
 
     private final ReactApplicationContext reactContext;
