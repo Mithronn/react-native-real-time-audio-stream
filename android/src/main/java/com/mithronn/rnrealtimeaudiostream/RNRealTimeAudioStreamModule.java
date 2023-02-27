@@ -158,7 +158,12 @@ public class RNRealTimeAudioStreamModule extends ReactContextBaseJavaModule {
                                 // Assign datas to body
                                 body.putInt("amplitude", amplitude);
                                 body.putDouble("frequency", frequency);
-                                body.putDouble("decibel", (double) (20 * Math.log(((double) amplitude) / 32767d)));
+
+                                int nonZeroAmplitude = 1;
+                                if(amplitude > 0) {
+                                    nonZeroAmplitude = amplitude;
+                                }
+                                body.putDouble("decibel", (double) (20 * Math.log(((double) nonZeroAmplitude) / 32767d)));
 
                                 eventEmitter.emit("data", body);
                             }
