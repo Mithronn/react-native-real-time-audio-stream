@@ -9,6 +9,7 @@ AudioRecordStream.start = () => RNRealTimeAudioStream.start();
 AudioRecordStream.stop = () => RNRealTimeAudioStream.stop();
 AudioRecordStream.pause = () => RNRealTimeAudioStream.pause();
 AudioRecordStream.resume = () => RNRealTimeAudioStream.resume();
+AudioRecordStream.toggleNoiseSuppression = state => RNRealTimeAudioStream.toggleNoiseSuppression(state);
 
 const eventsMap = {
     data: 'data',
